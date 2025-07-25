@@ -176,24 +176,17 @@ async function fetchQuoteForBirthday() {
 }
 
 // Function to count remaining days until next birthday
-function countRemainingDaysUntilBirthday(today, date, month) {
-    // console.log(date,month);
-
-    // Creating user's next birthday based on month and date accessed from user, and year
-    // extracted from current date's year.
-    let userNextBirthday = new Date(today.getFullYear(), month, date);
-    // console.log("User's birthday in current year", userNextBirthday);
-    // console.log("Today", today);
-
+function countRemainingDaysUntilBirthday(today, birthDate) {
+    // console.log(today,birthDate);
     // Checking if user's birthay has already passed this year.
-    // In that case, computing user's next birthday as next year's birthday.
-    if(userNextBirthday < today) {
-        userNextBirthday = new Date(today.getFullYear() + 1, month, date);
+    // In that case, computing user's next year birthday as current year + 1.
+    if(birthDate < today) {
+        birthDate.setFullYear(today.getFullYear() + 1);
     }
 
     const millisecondInADay = 24*60*60*1000;
     // userNextBirthday - today => returns answer in milliseconds
-    remainingNumberOfDays = Math.ceil((userNextBirthday - today)/millisecondInADay);
+    remainingNumberOfDays = Math.ceil((birthDate - today)/millisecondInADay);
     // console.log(remainingNumberOfDays);
     return remainingNumberOfDays;
 }
@@ -233,30 +226,29 @@ function displayRemainingDays(days) {
 function birthdayLogic(name, userBirthDate) {
     // Getting today's date => Date accessed in current timezone
     const todayDate = new Date();
-
-    //Resetting time to midnight 00:00 for accurate comparisons across timezones
+    //Resetting time to midnight 00:00 for accurate comparisons.
     todayDate.setHours(0,0,0,0); 
 
     // Reorganizing the user birthdate
-    // First userBirthDate value split and extracted as year, month, day.
-    // Then new Date created from userBirthDate using New Date() constructor, which gives 
+    // First userBirthDate value split and extracted as year, month, day. (month => 0-indexed.)
+    // Then new Date created from userBirthDate values using New Date() constructor, which gives 
     // birthday in current timezone, aligning with todayDate's timezone.
     // Resetting the birthDateFromUser time to midnight for accuracy in comparison.
-    const[year, month, day] = userBirthDate.split("-").map(Number);
-    const birthDateFromUser = new Date(todayDate.getFullYear(), month-1, day);
-    birthDateFromUser.setHours(0,0,0,0);
+    const userBirthDateValues = userBirthDate.split("-");
+    const birthDateThisYear = new Date(todayDate.getFullYear(), userBirthDateValues[1] - 1, userBirthDateValues[2]);
+    birthDateThisYear.setHours(0,0,0,0);
 
     // Explicitly hiding both sections before deciding which one to show based on condition
     hideDOMElement(birthdayDetailsSection);
     hideDOMElement(remainingDaysSection);
  
     // Comparing date and month to check if birthday is today
-    if((birthDateFromUser.getDate() === todayDate.getDate()) && (birthDateFromUser.getMonth() === todayDate.getMonth())) {
+    if((birthDateThisYear.getDate() === todayDate.getDate()) && (birthDateThisYear.getMonth() === todayDate.getMonth())) {
         showDOMElement(birthdayDetailsSection);
         displayBirthdayMessage(name);
         // console.log("Birthday is today");
     } else {
-        const remainingDays = countRemainingDaysUntilBirthday(todayDate, birthDateFromUser.getDate(), birthDateFromUser.getMonth());
+        const remainingDays = countRemainingDaysUntilBirthday(todayDate, birthDateThisYear);
         showDOMElement(remainingDaysSection);
         displayRemainingDays(remainingDays);
     }
