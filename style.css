@@ -1,0 +1,181 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Fredoka', sans-serif;
+  background-color: #b0c4de;
+  color: #222222;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  width: 100%;
+  padding: 32px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#welcome {
+  height: 700px;
+  background-color: #b0c4de;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 19px;
+}
+
+.welcomeContent h3 {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.welcomeContent button {
+  width: 220px;
+  padding: 16px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+  padding: 32px;
+  margin: 16px auto 0;
+  background-color: #FFFFFF33;
+  border-radius: 12px;
+  align-items: center;
+}
+
+#signUpForm h3, #loginForm h3 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+form label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  width: 100%;
+  text-align: center;
+}
+
+form input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #cccccc;
+  background-color: white;
+  width: 100%;
+  max-width: 300px;
+}
+
+form button {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 16px;
+  padding: 16px 24px;
+}
+
+#backFromSignUp, #backFromLogin {
+  margin-top: 16px;
+  padding: 16px 24px;
+  border: 1px solid #6c757d;
+  color: white;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+#backFromSignUp:hover, #backFromLogin:hover {
+  background-color: #222222;
+  color: white;
+}
+
+button, #signOutButton {
+  background-color: #6c757d;
+  padding: 10px, 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 16px 24px;
+}
+
+button:hover, #signOutButton:hover {
+  background-color: #222222;
+}
+
+#birthdayDetails, #remainingDaysDetails {
+  background-color: #f5f5f5;
+  color: #222222;
+  padding: 32px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: none;
+  position: relative;
+  top: 20%;
+  transform: translateY(-50%);
+}
+
+#birthdayHeading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+#birthdayQuote {
+  font-size: 19px;
+  color: #555555;
+}
+
+#quoteAuthor {
+  font-style: italic;
+  font-size: 16px;
+  color: #777777;
+  margin-top: 8px;
+}
+
+#remainingDays {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#remainingDaysForBirthday {
+  font-size: 19px;
+  color: #444444;
+  margin-bottom: 16px;
+}
+
+#signOutButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  background-color: #6c757d;
+  color: white;
+}
